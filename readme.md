@@ -1,15 +1,4 @@
-
-<div style="text-align: center">
-    <span style="font-size: 3em; font-weight: 700; font-family: Consolas">
-        Lab 01 <br>
-        A Gentle Introduction to Hadoop
-    </span>
-    <br><br>
-    <span style="">
-        A assignment for <code>CSC14118</code> Introduction to Big Data @ 20KHMT1
-    </span>
-    <br><br>
-</div>
+# Project Big Data Fundamentals - All In group - Labs
 
 ## Collaborators (All in)
 
