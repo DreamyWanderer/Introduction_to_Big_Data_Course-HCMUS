@@ -21,6 +21,7 @@ code-block-font-size: \scriptsize
 Each member has completed setting up a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
 ## Introduction to MapReduce
+##### 2. How does MapReduce deal with node failures?
 
 ## Running a warm-up problem: Word Count
 
