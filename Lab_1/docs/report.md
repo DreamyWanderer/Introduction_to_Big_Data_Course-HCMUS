@@ -20,6 +20,23 @@ code-block-font-size: \scriptsize
 
 Each member has completed setting up a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
+### Member 20120011 - Nguyen Hoang Huy:
+
+<p align="center">
+  <img src="images/20120011_NodeProof_0.jpg" style="width: 75%"/><br/>
+  Install Java and Hadoop then setup the environment path
+</p>
+
+<p align="center">
+  <img src="images/20120011_NodeProof_1.png" style="width: 75%"/><br/>
+  Run start-all.cmd to start namenode, datanode, resourcemanager, nodemanager program
+</p>
+
+<p align="center">
+  <img src="images/20120011_NodeProof_2.png" style="width: 75%"/><br/>
+  Access localhost:9000
+</p>
+
 ## Introduction to MapReduce
 ##### 2. How does MapReduce deal with node failures?
 
