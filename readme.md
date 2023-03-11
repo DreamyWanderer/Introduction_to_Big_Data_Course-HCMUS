@@ -15,7 +15,9 @@
 ## Extra
 
 - [Group working folder](https://drive.google.com/drive/folders/1qhtrla9PtIhLcE-j6GWKFn-5prRnedAG?usp=share_link) (Google Drive folder)
-- [Current working Markdown report link](https://hackmd.io/join/Hy6-bXQ1n)
+- Current working Markdown report link
+  - [Invitation link](https://hackmd.io/join/Hy6-bXQ1n)
+  - [Group Markdown report](https://hackmd.io/team/Allin)
 
 ---
 <div style="page-break-after: always"></div>
