@@ -44,6 +44,28 @@ Each member has completed setting up a Single node cluster on their local machin
 
 Each member has completed running the WordCount (v.1) program - a simple MapReduce program - on a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
+### Member 20120011 - Nguyen Hoang Huy
+
+<p align="center">
+  <img src="images/20120011_WordCount_0.jpg" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+<p align="center">
+  <img src="images/20120011_WordCount_1.jpg" style="width: 75%"/><br/>
+  Put file01.txt and file02.txt into input directory
+</p>
+
+<p align="center">
+  <img src="images/20120011_WordCount_2.jpg" style="width: 75%"/><br/>
+  Run WordCount program
+</p>
+
+<p align="center">
+  <img src="images/20120011_WordCount_3.jpg" style="width: 75%"/><br/>
+  Let's show the result
+</p>
+
 ## Bonus
 
 Insert table example:
