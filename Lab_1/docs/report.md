@@ -38,6 +38,16 @@ Each member has completed setting up a Single node cluster on their local machin
 </p>
 
 ## Introduction to MapReduce
+##### 1. How do the input keys-values, the intermediate keys-values, and the output keys-values relate?
+
+<p align="justify">
+The input keys-values are the data sets that are processed by the Map function. The input data is divided into key-value pairs that are distributed across the nodes in the Hadoop cluster. The Map function processes each key-value pair and produces an intermediate key-value pair.
+
+The intermediate keys-values are produced by the Map function and are used as input to the Reduce function. The intermediate key-value pairs are sorted by key and partitioned based on the key. Each partition is processed by a separate instance of the Reduce function.
+
+The output keys-values are the final result of the MapReduce process. The Reduce function produces the final key-value pairs which are written to the Hadoop Distributed File System (HDFS) or to an external storage system.
+</p>
+
 ##### 2. How does MapReduce deal with node failures?
 
 ## Running a warm-up problem: Word Count
