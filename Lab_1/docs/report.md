@@ -37,6 +37,23 @@ Each member has completed setting up a Single node cluster on their local machin
   Access localhost:9000
 </p>
 
+### Member 20120165 - Hong Nhat Phuong:
+
+<p align="center">
+  <img src="images/20120165_Hadoop1.png" style="width: 75%"/><br/>
+  Install Java and Hadoop then setup the environment path
+</p>
+
+<p align="center">
+  <img src="images/20120165_Hadoop2.png" style="width: 75%"/><br/>
+  Make changes on core-site.xml, hdfs-site.xml, mapred-site.xml, yarn-site.xml
+</p>
+
+<p align="center">
+  <img src="images/20120165_Hadoop3.png" style="width: 75%"/><br/>
+  Format namenode and start all daemons hadoop
+</p>
+
 ## Introduction to MapReduce
 ##### 1. How do the input keys-values, the intermediate keys-values, and the output keys-values relate?
 
@@ -49,6 +66,14 @@ The output keys-values are the final result of the MapReduce process. The Reduce
 </p>
 
 ##### 2. How does MapReduce deal with node failures?
+
+<p align="justify">
+When the compute node at which the master is executing fails, a new copy can be started from the last checkpointed state. Only this one node can bring the entire process down; other node failures will be managed by the master.
+
+The master sends heartbeat to every worker periodically. If there is no response from the worker within a certain period of time, the master marks the worker as failed. Map tasks that were assigned by that worker will be reset to their original idle state and eligible for scheduling by other workers, even if they have completed. Completed map tasks are re-executed because their output is stored at that compute node, and is now unavailable to access.
+
+Similarly, reduce task in progress on the failed worker is also reset to idle and will have to be redone. Completed reduce tasks do not need to be re-executed since their output is stored in a global file system. When a map task is executed first by a worker and then later executed by another worker (because the first one failed), all workers executing reduce tasks are notified of the re-execution.
+</p>
 
 ## Running a warm-up problem: Word Count
 
@@ -76,6 +101,27 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
   Let's show the result
 </p>
 
+### Member 20120165 - Hong Nhat Phuong
+
+<p align="center">
+  <img src="images/20120165_WordCount1.png" style="width: 75%"/><br/>
+  Create WordCount.java
+</p>
+
+<p align="center">
+  <img src="images/20120165_WordCount2.png" style="width: 75%"/><br/>
+  Create folder input and put file01.txt, file02.txt into input directory
+</p>
+
+<p align="center">
+  <img src="images/20120165_WordCount3.png" style="width: 75%"/><br/>
+  Compile WordCount.java, create a jar and run WordCount program
+</p>
+
+<p align="center">
+  <img src="images/20120165_WordCount4.png" style="width: 75%"/><br/>
+  Show the output using -cat command
+</p>
 ## Bonus
 
 Insert table example:
