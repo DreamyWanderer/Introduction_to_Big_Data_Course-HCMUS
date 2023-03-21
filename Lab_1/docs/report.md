@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Lab 01: A Gentle Introduction to Hadoop"
 author: ["your-team-name"]
 date: "2023-02-17"
@@ -12,15 +12,23 @@ titlepage-rule-height: 2
 book: true
 classoption: oneside
 code-block-font-size: \scriptsize
----
+--- -->
 
-# Lab 01: A Gentle Introduction to Hadoop
+<h1 style="background-color:#37275a; font-weight: 500; color:white; line-height: 3em; padding-left: 1em; font-size: 50px;">Lab 01: A Gentle Introduction to Hadoop</h1>
 
-## Setting up Single-node Hadoop Cluster
+- Author: All in
+
+- Date: 21/03/2023
+
+- Subtitle: CSC14118 Introduction to Big Data 20KHMT1
+
+- Language: English
+
+## 📂 **1. Setting up Single-node Hadoop Cluster**
 
 Each member has completed setting up a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
-### Member 20120011 - Nguyen Hoang Huy:
+### 📌 **Member 1:** 20120011 - Nguyen Hoang Huy
 
 <p align="center">
   <img src="images/20120011_NodeProof_0.jpg" style="width: 75%"/><br/>
@@ -37,7 +45,24 @@ Each member has completed setting up a Single node cluster on their local machin
   Access localhost:9000
 </p>
 
-### Member 20120165 - Hong Nhat Phuong:
+### 📌 **Member 2:** 20120030 - Nguyen Thien An
+
+<p align="center">
+  <img src="images/20120030/Task_1/1.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/2.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/3.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+### 📌 **Member 4:** 20120165 - Hong Nhat Phuong:
 
 <p align="center">
   <img src="images/20120165_Hadoop1.png" style="width: 75%"/><br/>
@@ -54,8 +79,9 @@ Each member has completed setting up a Single node cluster on their local machin
   Format namenode and start all daemons hadoop
 </p>
 
-## Introduction to MapReduce
-##### 1. How do the input keys-values, the intermediate keys-values, and the output keys-values relate?
+## 📂 **2. Introduction to MapReduce**
+
+<h5 style = "background-color:#37275a; padding: 1em; font-style: italic; "> 📌 1. How do the input keys-values, the intermediate keys-values, and the output keys-values relate? </h5>
 
 <p align="justify">
 The input keys-values are the data sets that are processed by the Map function. The input data is divided into key-value pairs that are distributed across the nodes in the Hadoop cluster. The Map function processes each key-value pair and produces an intermediate key-value pair.
@@ -65,7 +91,7 @@ The intermediate keys-values are produced by the Map function and are used as in
 The output keys-values are the final result of the MapReduce process. The Reduce function produces the final key-value pairs which are written to the Hadoop Distributed File System (HDFS) or to an external storage system.
 </p>
 
-##### 2. How does MapReduce deal with node failures?
+<h5 style = "background-color:#37275a; padding: 1em; font-style: italic; "> 📌 2. How does MapReduce deal with node failures? </h5>
 
 <p align="justify">
 When the compute node at which the master is executing fails, a new copy can be started from the last checkpointed state. Only this one node can bring the entire process down; other node failures will be managed by the master.
@@ -75,23 +101,21 @@ The master sends heartbeat to every worker periodically. If there is no response
 Similarly, reduce task in progress on the failed worker is also reset to idle and will have to be redone. Completed reduce tasks do not need to be re-executed since their output is stored in a global file system. When a map task is executed first by a worker and then later executed by another worker (because the first one failed), all workers executing reduce tasks are notified of the re-execution.
 </p>
 
-##### 3. What is the meaning and implication of locality?
+<h5 style = "background-color:#37275a; padding: 1em; font-style: italic; "> 📌 3. What is the meaning and implication of locality? What does it use? </h5>
 
 Locality means that taking advantage of the fact that the input data is stored on the local disks of the machine that make up the clusters. As a result, the network bandwidth is conserved, and when running large MapReduce operations on a large cluster, most input is read locally, consume no network bandwidth, speed processes up significantly.
 
-##### What does it use?
-
 Each file is divided into same size blocks (default 64 MB), then each block is created multiple copies (typically 3 copies). These blocks are stored on different machine, but highly optimised location (maybe 2 copies in the same rack, and 1 copy in the other rack in case of failing). MapReduce master take the location of the input files and above blocks into account and attempts to schedule a map task on a machine that contains a replica of the corresponding input data. If that is impossible, it trys to schedule map tasks near a replica of that task's input data (maybe on the same rack). Locality is also the result of Rack awareness of Hadoop system.
 
-##### 4. Which problem is addressed by introducing a combiner function to the MapReduce model?
+<h5 style = "background-color:#37275a; padding: 1em; font-style: italic; "> 📌 4. Which problem is addressed by introducing a combiner function to the MapReduce model? </h5>
 
 The combiner function introduced to the MapReduce model addresses the problem of **network congestion** and **data transfer**. In detail, When data is processed by the Map function, it generates a large number of key-value pairs, which are then sorted and shuffled before being sent to the Reduce function. This sorting and shuffling process can generate a significant amount of network traffic, especially if there are many duplicate keys. The combiner function is introduced after the Map phase and before the Shuffle and Sort phase. Its purpose is to aggregate the output of the Map function for each key, reducing the amount of data that needs to be transferred across the network. This can greatly reduce network congestion and improve the overall performance and scalability of the MapReduce job. Hence, the combiner function reduces network traffic, which is the main problem addressed by its introduction to the MapReduce model.
 
-## Running a warm-up problem: Word Count
+## 📂 **3. Running a warm-up problem: Word Count**
 
 Each member has completed running the WordCount (v.1) program - a simple MapReduce program - on a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
-### Member 20120011 - Nguyen Hoang Huy
+### 📌 **Member 1:** 20120011 - Nguyen Hoang Huy
 
 <p align="center">
   <img src="images/20120011_WordCount_0.jpg" style="width: 75%"/><br/>
@@ -113,7 +137,24 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
   Let's show the result
 </p>
 
-### Member 20120165 - Hong Nhat Phuong
+### 📌 **Member 2:** 20120030 - Nguyen Thien An
+
+<p align="center">
+  <img src="images/20120030/Task_3/1.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_3/2.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_3/3.png" style="width: 75%"/><br/>
+  Create input and output directory in hadoop fs
+</p>
+
+### 📌 **Member 4:** 20120165 - Hong Nhat Phuong
 
 <p align="center">
   <img src="images/20120165_WordCount1.png" style="width: 75%"/><br/>
@@ -134,7 +175,8 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
   <img src="images/20120165_WordCount4.png" style="width: 75%"/><br/>
   Show the output using -cat command
 </p>
-## Bonus
+
+## 📂 **4. Bonus**
 
 Insert table example:
 
