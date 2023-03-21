@@ -1,0 +1,10 @@
+A eq
+B neg
+C pos
+D neg
+E neg
+F pos
+G pos
+H neg
+I pos
+J eq
