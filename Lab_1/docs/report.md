@@ -48,18 +48,83 @@ Each member has completed setting up a Single node cluster on their local machin
 ### 📌 **Member 2:** 20120030 - Nguyen Thien An
 
 <p align="center">
+  <img src="images/20120030/Task_1/id.png" style="width: 75%"/><br/>
+  Id of the first block to proof this is a personal computer.
+</p>
+
+<p align="center">
   <img src="images/20120030/Task_1/1.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  Install Java and Hadoop then setup the environment path
 </p>
 
 <p align="center">
   <img src="images/20120030/Task_1/2.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  Install ssh and pdsh
 </p>
 
 <p align="center">
   <img src="images/20120030/Task_1/3.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  JAVA_HOME and HADOOP_HOME
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/4.png" style="width: 75%"/><br/>
+  Show hadoop version and bin/hadoop
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/5.png" style="width: 75%"/><br/>
+  Make changes on core-site.xml, hdfs-site.xml, mapred-site.xml, yarn-site.xml
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/6.png" style="width: 75%"/><br/>
+  ssh localhost
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/7.png" style="width: 75%"/><br/>
+  Start all daemons hadoop
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/8.png" style="width: 75%"/><br/>
+  Create a folder named 20120030 in /user
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/9.png" style="width: 75%"/><br/>
+  Create folder 20120030 successfully!
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/10.png" style="width: 75%"/><br/>
+  Start yarn and historyserver
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/11_DataNode.png" style="width: 75%"/><br/>
+  DataNode
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/11_MapReduceServer.png" style="width: 75%"/><br/>
+  MapReduce Server
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/11_NameNode.png" style="width: 75%"/><br/>
+  NameNode
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/11_YarnNode.png" style="width: 75%"/><br/>
+  YarnNode
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_1/12.png" style="width: 75%"/><br/>
+  Stop all daemons hadoop
 </p>
 
 ### 📌 **Member 4:** 20120165 - Hong Nhat Phuong:
@@ -140,18 +205,33 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
 ### 📌 **Member 2:** 20120030 - Nguyen Thien An
 
 <p align="center">
+  <img src="images/20120030/Task_3/input.png" style="width: 75%"/><br/>
+  File "input.txt"
+</p>
+
+<p align="center">
   <img src="images/20120030/Task_3/1.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  Create folder input and put input.txt into input directory
 </p>
 
 <p align="center">
   <img src="images/20120030/Task_3/2.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  Compile WordCount.java, create a jar and run WordCount program
 </p>
 
 <p align="center">
   <img src="images/20120030/Task_3/3.png" style="width: 75%"/><br/>
-  Create input and output directory in hadoop fs
+  Show the output using -cat command
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_3/4.png" style="width: 75%"/><br/>
+  Nodes of the cluster
+</p>
+
+<p align="center">
+  <img src="images/20120030/Task_3/MapReduceServer.png" style="width: 75%"/><br/>
+  MapReduce Server
 </p>
 
 ### 📌 **Member 4:** 20120165 - Hong Nhat Phuong
