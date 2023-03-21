@@ -16,7 +16,7 @@ code-block-font-size: \scriptsize
 
 <h1 style="background-color:#37275a; font-weight: 500; color:white; line-height: 3em; padding-left: 1em; font-size: 50px;">Lab 01: A Gentle Introduction to Hadoop</h1>
 
-- Author: All in
+- Author: [All in] group
 
 - Date: 21/03/2023
 
@@ -28,24 +28,133 @@ code-block-font-size: \scriptsize
 
 Each member has completed setting up a Single node cluster on their local machine, as described in supplied tutorial. Also, this process is captured in screenshots.
 
-### 📌 **Member 1:** 20120011 - Nguyen Hoang Huy
+### 📌 **Member 1:** 20120090 - Nguyen The Hoang
 
-<p align="center">
+> This member will present detail of the steps setting up Single-node Hadoop cluster. Other members will only show result in their machines. Some steps or result may be different between machines of each member, due to some difference of software/hardware environment and tutorials that they followed. But without loss of generality, the main steps are same.
+>
+> This Single-node Hadoop Cluster is installed in the Linux OS, Mint distro.
+
+<p align="center" style="margin-bottom:1cm">
+  <img src="images\20120090\Task_1\1.png" style="width: 75%"/><br/>
+  Step 1: Make sure that a suitable version of Java installed
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+  <img src="images\20120090\Task_1\3.png" style="width: 75%"/><br/>
+  Step 2: Download and extracted the Hadoop packaged file from the Apache Hadoop releases page
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+  <img src="images\20120090\Task_1\4.png" style="width: 75%; "/><br/>
+  Step 3: Set up the environment variable <code>JAVA_HOME</code> in the file <i>etc/environment</i> which points to the binary folder of Java, so that Hadoop can use Java when compiling MapReduce programs and execute damemons/processes.
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\5.png" style="width: 75%" /><br/>
+  Step 4: Set up the environment variable <code>HADOOP_HOME</code> in the file <i>~/.bashrc</i> (or by using <code>export</code> temporarily) which points to the extracted folder of Hadoop, so that it is more convenient to call Hadoop command after that.
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\6.png" style="width: 75%"/><br/>
+  Step 5: Check that Hadoop runs by typing <code>hadoop version</code>
+</p>
+
+#### **Running in Local (Standalone Mode)**
+
+</br>
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\7.png" style="width: 75%"/><br/>
+  Step 6: Keep the default configure file of Hadoop. Conduct the Standalone Operation as instructed in [^1], the above picture shows the result in the <i>output</i> folder
+</p>
+
+#### **Running in Pseudo-Distributed Mode**
+
+</br>
+<p align="center" style="margin-bottom:1cm">
+  Step 7: Change the configure files: <i>core-site.xml, hdfs-site.xml, mapred-site.xml, yarn-site.xml</i> as instructed in [^1] and [^2] to set up for Pseudo-Distributed Mode
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\2.png" style="width: 75%"/><br/>
+  Step 8: Install <i>ssh</i>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\8.png" style="width: 75%"/><br/>
+  Step 9: Enable passwordless login by generating new SSH key with an empty passphrase
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\9.png" style="width: 75%"/><br/>
+  Step 10: Formatting the HDFS filesystem <i>ssh</i>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\10.png" style="width: 75%"/><br/>
+  Step 11: Start NameNode daemon and DataNode daemon with <code>start-dfs.sh</code>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\11.png" style="width: 75%"/><br/>
+  Step 12: As instructed in [^1], make the HDFS directories required to execute MapReduce jobs; copy some local files into the distributed filesystem and run the MapReduce example provided
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\12.png" style="width: 75%"/><br/>
+  Step 13: Copy the output files from the distributed filesystem to the local filesystem to examine them
+</p>
+
+#### **Running in Pseudo-Distributed Mode with YARN**
+
+<br/>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\13.png" style="width: 75%"/><br/>
+  Step 14: Start the ResourceManager daemon and NodeManager daemon by running <code>start-yarn.sh</code>. Optionally, start the history server by running <code>mr-jobhistory-daemon.sh start historyserver</code>
+</p>
+
+#### **Accessing the Web interfaces of running Hadoop process**
+
+These are the results when start all main components of a Single-node Hadoop Cluster
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\14_NameNode.png" style="width: 75%"/><br/>
+  Web UI of NameNode through <code>http://localhost:9870/</code>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\14_DataNode.png" style="width: 75%"/><br/>
+  Web UI of a DataNode
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\14_YARNNode.png" style="width: 75%"/><br/>
+  Web UI of a ResourceManager through <code>http://localhost:8088/</code>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_1\14_MapReduceServer.png" style="width: 75%"/><br/>
+  Web UI of MapReduce history server <code>http://localhost:19888/</code>
+</p>
+
+### 📌 **Member 2:** 20120011 - Nguyen Hoang Huy
+
+<p align="center" style="margin-bottom:1cm">
   <img src="images/20120011_NodeProof_0.jpg" style="width: 75%"/><br/>
   Install Java and Hadoop then setup the environment path
 </p>
 
-<p align="center">
+<p align="center" style="margin-bottom:1cm">
   <img src="images/20120011_NodeProof_1.png" style="width: 75%"/><br/>
   Run start-all.cmd to start namenode, datanode, resourcemanager, nodemanager program
 </p>
 
-<p align="center">
+<p align="center" style="margin-bottom:1cm">
   <img src="images/20120011_NodeProof_2.png" style="width: 75%"/><br/>
   Access localhost:9000
 </p>
 
-### 📌 **Member 2:** 20120030 - Nguyen Thien An
+### 📌 **Member 3:** 20120030 - Nguyen Thien An
 
 <p align="center">
   <img src="images/20120030/Task_1/id.png" style="width: 75%"/><br/>
@@ -127,7 +236,7 @@ Each member has completed setting up a Single node cluster on their local machin
   Stop all daemons hadoop
 </p>
 
-### 📌 **Member 4:** 20120165 - Hong Nhat Phuong:
+### 📌 **Member 4:** 20120165 - Hong Nhat Phuong
 
 <p align="center">
   <img src="images/20120165_Hadoop1.png" style="width: 75%"/><br/>
@@ -234,6 +343,36 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
   MapReduce Server
 </p>
 
+### 📌 **Member 3:** 20120090 - Nguyen The Hoang
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_3\1.png" style="width: 75%"/><br/>
+  Step 1: Create the WordCount v1.0 file as instructed in [^3]. Compile this file to the <i>class</i> and <i>jar</i> file</code>
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_3\2.png" style="width: 75%"/><br/>
+  Step 2: Start the Hadoop on the Pseudo-distributed Mode
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_3\3.png" style="width: 75%"/><br/>
+ <img src="images\20120090\Task_3\4.png" style="width: 75%"/><br/>
+  Step 3: As instructed in [^3], create two input files in the distributed filesystem, in the <i>input</i> folder
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_3\Result_1.png" style="width: 75%"/><br/>
+  Step 4: Run the MapReduce program
+</p>
+
+<p align="center" style="margin-bottom:1cm">
+ <img src="images\20120090\Task_3\Result_3.png" style="width: 75%"/><br/>
+ <img src="images\20120090\Task_3\Result_4.png" style="width: 75%"/><br/>
+ <img src="images\20120090\Task_3\Result_5.png" style="width: 75%"/><br/>
+  Result (from top to bottom picture):<br/>1. The submited jobs show in the Resource Manager YARN<br/>2. The DataNode is doing its assigned task<br/>3. The result is recored in the <i>output</i> folder, pulled to the local filesystem to print in the terminal
+</p>
+
 ### 📌 **Member 4:** 20120165 - Hong Nhat Phuong
 
 <p align="center">
@@ -258,56 +397,10 @@ Each member has completed running the WordCount (v.1) program - a simple MapRedu
 
 ## 📂 **4. Bonus**
 
-Insert table example:
+### **4.1. Bad Relationship**
 
-Server IP Address | Ports Open
-------------------|----------------------------------------
-192.168.1.1       | **TCP**: 21,22,25,80,443
-192.168.1.2       | **TCP**: 22,55,90,8080,80
-192.168.1.3       | **TCP**: 1433,3389\
-**UDP**: 1434,161
+[^1]: Apache Hadoop, “Hadoop: Setting up a Single Node Cluster,” Jul. 29, 2022. https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html.
 
-Code example:
+[^2] T. White, “Appendix A. Installing Apache Hadoop,” in Hadoop: The definite guide, 2012, p. 680.
 
-```python
-print("Hello")
-```
-
-```bash
-cat ~/.bashrc
-```
-
-Screenshot example:
-
-![Proof of change your shell prompt's name](images/changeps1.png)
-
-\newpage
-
-Screenshot example:
-
-![ImgPlaceholder](images/placeholder-image-300x225.png)
-
-Reference examples:
-
-Some text in which I cite an author.[^fn1]
-
-More text. Another citation.[^fn2]
-
-What is this? Yet _another_ citation?[^fn3]
-
-## References
-<!-- References without citing, this will be display as resources -->
-- Three Cloudera version of WordCount problem:
-  - <https://docs.cloudera.com/documentation/other/tutorial/CDH5/topics-/ht_wordcount1.html>
-    - <https://docs.cloudera.com/documentation/other/tutorial/CDH5/topics/ht_wordcount2.html>
-    - <https://docs.cloudera.com/documentation/other/tutorial/CDH5/topics/ht_wordcount3.html>
-- Book: MapReduce Design Patterns [Donald Miner, Adam Shook, 2012]
-- All of StackOverflow link related.
-
-<!-- References with citing, this will be display as footnotes -->
-[^fn1]: So Chris Krycho, "Not Exactly a Millennium," chriskrycho.com, July 2015, http://v4.chriskrycho.com/2015/not-exactly-a-millennium.html
-(accessed July 25, 2015)
-
-[^fn2]: Contra Krycho, 15, who has everything _quite_ wrong.
-
-[^fn3]: ibid
+[^3] Apache Hadoop, “MapReduce Tutorial,” Jul. 29, 2022. https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html.
