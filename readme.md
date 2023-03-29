@@ -1,7 +1,5 @@
 # Project Big Data Fundamentals - All In group - Labs
 
-## Lưu ý: nộp bài bằng file __teamAll in_MSSV.zip__, thay MSSV thành MSSV của bản thân
-
 ## Collaborators (All in)
 
 - `20120011` **Nguyễn Hoàng Huy**
