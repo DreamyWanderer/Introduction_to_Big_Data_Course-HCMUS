@@ -37,10 +37,8 @@ public class Weather {
     	  word.set("Cold day");
     	  context.write(date, word);
       }
-
-      
-      }
     }
+  }
 
 
   public static class WeatherReducer
