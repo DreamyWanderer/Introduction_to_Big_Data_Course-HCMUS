@@ -66,10 +66,77 @@ context.write(key, result);
 ```
 
 **Run program**
-![Create folder, put input file into Lab02 directory and run program](images/changeps1.png)
+![Create file input](images/problem3_input.png)
+![Create folder, put input file into Lab02 directory and run program](images/problem3_mkdir.png)
+![Program runs successfully and display the result](images/problem3_run.png)
 
-![Proof of change your shell prompt's name](images/changeps1.png)
+#### Problem 3: Call Data Record
 
+**Input**: list of data, each line includes caller phone number, recipient phone number, call start time, call end time, STD flag, each information separated by vertical bar ( | )
+Consider following format
+FromPhoneNumber|ToPhoneNumber|CallStartTime|CallEndTime|STDFlag
+
+**Output**: all phone numbers who are making more than 60 minutes of STD calls.
+
+**Idea**: extract caller phone number, call start and end time from data. Calculate the total call time of each phone number, save all the phone numbers have total time more than 60 minutes.
+
+**Code**:
+***Mapper***
+*map() function*:
+- Use split() command to cut string, save information into an array
+- For the phone number has STD call, use get_time() function to get time in milliseconds of call start time and call end time, call time in millisec is saved to dur, in minutes is saved to duration
+  
+```java
+Text phone_num = new Text();
+LongWritable duration = new LongWritable();
+
+String[] word = value.toString().split("[|]");
+
+if (word[4].equalsIgnoreCase("1")) {
+    phone_num.set(word[0]);
+    String call_end = word[3];
+    String call_start = word[2];
+    long dur = get_time(call_end) - get_time(call_start);  //dur: time in millisecond
+    duration.set(dur / (1000 * 60));    //duration: time in minute
+    context.write(phone_num, duration);
+}
+```
+
+*get_time() function:*
+- Use SimpleDateFormat library to convert string data to Date data then use getTime() command to get time (in millisec)
+
+```java
+private long get_time(String str) {
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date date = null;
+    try {
+    	date = formatter.parse(str);
+    } catch (ParseException e) {
+    	e.printStackTrace();
+    }
+    return date.getTime();
+}
+```
+
+*reducer() function:*
+- Calculate the total call time of 1 phone number, if total time is more thanh 60 minutes, print the result.
+
+```java
+LongWritable result = new LongWritable();
+long sum = 0;
+for (LongWritable val : values) {
+    sum += val.get();
+}
+result.set(sum);
+if (sum >= 60) {
+    context.write(key, result);
+}
+```
+
+**Run program**
+![Create file input](images/problem9_input.png)
+![Create folder, put input file into Lab02 directory and run program](images/problem9_mkdir.png)
+![Program runs successfully and display the result](images/problem9_run.png)
 
 
 
