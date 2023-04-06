@@ -70,6 +70,49 @@ context.write(key, result);
 ![Create folder, put input file into Lab02 directory and run program](images/problem3_mkdir.png)
 ![Program runs successfully and display the result](images/problem3_run.png)
 
+#### Problem 4: Patent Program
+
+**Input**: Each patent has sub-patent ids associated with it.
+
+**Output**: The number of sub-patent associated with each patent.
+
+**Idea**: Just look like WordCount program.
+
+***Map***: Split lines, get 2 tokens and write them to context.
+
+```java
+public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+			String line = value.toString();
+			StringTokenizer tokenizer = new StringTokenizer(line, " ");
+			while (tokenizer.hasMoreTokens()) {
+				String pat = tokenizer.nextToken();
+				k.set(pat);
+				String sub = tokenizer.nextToken();
+				v.set(sub);
+				context.write(k, v);
+			}
+		}
+```
+***Reduce***: Count the number of sub-patent associated with each patent.
+
+```java
+public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+			int sum = 0;
+			for (Text x : values) {
+				sum++;
+			}
+			context.write(key, new IntWritable(sum));
+		}
+```
+
+**Run**:
+
+![](images/Problem4_Run.jpg)
+
+**Result**:
+
+![](images/Problem4_Result.jpg)
+
 #### Problem 3: Call Data Record
 
 **Input**: list of data, each line includes caller phone number, recipient phone number, call start time, call end time, STD flag, each information separated by vertical bar ( | )
@@ -138,7 +181,73 @@ if (sum >= 60) {
 ![Create folder, put input file into Lab02 directory and run program](images/problem9_mkdir.png)
 ![Program runs successfully and display the result](images/problem9_run.png)
 
+#### Problem 8: Music Track Program
 
+**Input**: UserId, TrackId, Shared, Radio, Skip
+
+**Output**: TrackID, the number of unique users
+
+**Idea**: I reference to the solution and github.
+
+https://gist.github.com/deshpandetanmay/70277a43dc9332819c93
+
+***Map***: 
+Split lines, if it is a valid record then write to context
+```java
+public static class UniqueListenerMapper extends
+			Mapper<Object, Text, IntWritable, IntWritable> {
+
+		IntWritable trackId = new IntWritable();
+		IntWritable userId = new IntWritable();
+
+		public void map(Object key, Text value,
+				Mapper<Object, Text, IntWritable, IntWritable>.Context context)
+				throws IOException, InterruptedException {
+
+			String[] parts = value.toString().split("[|]");
+			trackId.set(Integer.parseInt(parts[LastFMConstants.TRACK_ID]));
+			userId.set(Integer.parseInt(parts[LastFMConstants.USER_ID]));
+
+			if (parts.length == 5) {
+				context.write(trackId, userId);
+			} else {
+				// add counter for invalid records
+				context.getCounter(COUNTERS.INVALID_RECORD_COUNT).increment(1L);
+			}
+
+		}
+	}
+```
+***Reduce***: Count the number of unique users
+
+```java
+
+	public static class UniqueListenerReducer extends
+			Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
+
+		public void reduce(
+				IntWritable trackId,
+				Iterable<IntWritable> userIds,
+				Reducer<IntWritable, IntWritable, IntWritable, IntWritable>.Context context)
+				throws IOException, InterruptedException {
+
+			Set<Integer> userIdSet = new HashSet<Integer>();
+			for (IntWritable userId : userIds) {
+				userIdSet.add(userId.get());
+			}
+			IntWritable size = new IntWritable(userIdSet.size());
+			context.write(trackId, size);
+		}
+	}
+```
+
+**Run**:
+
+![](images/Problem8_Run.jpg)
+
+**Result**:
+
+![](images/Problem8_Result.jpg)
 
 Code example:
 
