@@ -22,9 +22,9 @@ public class Weather {
     public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException {
       String line = value.toString();
-      String d = line.substring(14, 22);
-      float max = Float.parseFloat(line.substring(104, 108).trim());
-      float min = Float.parseFloat(line.substring(112, 116).trim());
+      String d = line.substring(6, 14);
+      float max = Float.parseFloat(line.substring(39, 46).trim());
+      float min = Float.parseFloat(line.substring(47, 53).trim());
       
       if (max > 40.0) {
     	  date.set(d);

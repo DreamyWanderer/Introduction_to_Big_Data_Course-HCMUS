@@ -1,3 +1,0 @@
-20230101	Hot day 
-20230102	Cold day 
-20230103	Cold day Hot day 

@@ -45,8 +45,10 @@ public class CallDataRecord {
     	  phone_num.set(word[0]);
     	  String call_end = word[3];
     	  String call_start = word[2];
-    	  long dur = get_time(call_end) - get_time(call_start);  //dur: time in millisecond
-    	  duration.set(dur / (1000 * 60));    //duration: time in minute
+        long end_mili = get_time(call_end);
+        long start_mili = get_time(call_start);
+    	  long dur = end_mili - start_mili;  //dur: time in millisecond
+    	  duration.set(dur / (60 * 1000));    //duration: time in minute
     	  context.write(phone_num, duration);
       }
     }
