@@ -47,7 +47,7 @@ code-block-font-size: \scriptsize
 
 ***Mapper*** The map implementation is `WordSizeWordCountMapper()`. It receives each line of the text, as type `Text`. After that it emits a pair, with key is an integer show the word size - type `IntWritable` - and value is `1`. It means that, the map function seperate words by whitespace, then for each word, it counts the number of letters in that word. At the end, it just found 1 word has some specific size, and it emits them a pair key-value described above.
 
-But the word can have some special character as a result of sentence or paragraph. Example `you.`, `ha!`, `so,` have `.`, `!` and `,` attached ti them, but normally, that can not be counted as some valid letter forms a word. To solve this problem in the map function, for each word we only keep `a-zA-Z_` letter and remove all others before we find the size of a word by using Regex [^].
+But the word can have some special character as a result of sentence or paragraph. Example `you.`, `ha!`, `so,` have `.`, `!` and `,` attached ti them, but normally, that can not be counted as some valid letter forms a word. To solve this problem in the map function, for each word we only keep `a-zA-Z_` letter and remove all others before we find the size of a word by using Regex [^1].
 
 ```java
 word.set( itr.nextToken().replaceAll("[^\\w]", "") );
@@ -171,7 +171,7 @@ public void reduce(Text key, Iterable<Text> values, Context context) throws IOEx
 
 ## Problem 6: Average Salary Program
 
-**Input**: the input file is taken from [^]. The file is written in `csv` format, with using `""` as escaped characted for `,` in case of long string. There are 13 fields. In 13 fields, there are 3 empty fields. Based on `id` field, there are 148654 distinct employeees. For this task, we take into account 2 fields: `JobTitle` and `TotalPayBenefits`. We will count for each distinct `JobTitle`, what is the average total pay benefits the employees in that job title can receive. Based on data, there are 2159 distinct `JobTitle`.
+**Input**: the input file is taken from [^2]. The file is written in `csv` format, with using `""` as escaped characted for `,` in case of long string. There are 13 fields. In 13 fields, there are 3 empty fields. Based on `id` field, there are 148654 distinct employeees. For this task, we take into account 2 fields: `JobTitle` and `TotalPayBenefits`. We will count for each distinct `JobTitle`, what is the average total pay benefits the employees in that job title can receive. Based on data, there are 2159 distinct `JobTitle`.
 
 **Output**: for each `JobTitle`, employees in that field receive how much total pay benefits (salary) in average.
 
@@ -179,7 +179,7 @@ public void reduce(Text key, Iterable<Text> values, Context context) throws IOEx
 
 **Code**:
 
-***Mapper*** The map implementation is `AverageSalaryMapper()`.  The map function takes each line as input with `Text` type. It then uses seperate the data as csv format by this statements, using Regex (we need to take care the case there is `,` in the job title, so we used Regex). [^].
+***Mapper*** The map implementation is `AverageSalaryMapper()`.  The map function takes each line as input with `Text` type. It then uses seperate the data as csv format by this statements, using Regex (we need to take care the case there is `,` in the job title, so we used Regex). [^3].
 
 ```java
 String[] columns = valueStr.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
@@ -212,19 +212,19 @@ for (FloatWritable val : values) {
 It emits the results as <`JobTitle`, `Average_value_computed_of_that_jobtitle`> as type <`Text`, `FloatWritable`>.
 
 ![Running process](images/Problem6_Running.png)
-![Result](images/Probelm6_Result.png)
+![Result](images/Problem6_Result.png)
 
 ## Problem 7: DeIdentify Healthcare Program
 
-**Input**: the input file is described in the given document [^]. We only create the dataset includes 6 records, which are same as in the above document.
+**Input**: the input file is described in the given document [^4]. We only create the dataset includes 6 records, which are same as in the above document.
 
 **Output**: we specify the fields we want to encrypt. Here we only keep the 1st, 7th and 9th fields. The others will be encrypted by the SHA-256 encryption algorithm. The final datas need to have the same format as original file.
 
-**Idea**: we only use one map function to encrypt required fields. The results from this function will also be the final result. We need to choose the field for encryption carefully while keep other fields untouched. The whole idea is taken from [^].
+**Idea**: we only use one map function to encrypt required fields. The results from this function will also be the final result. We need to choose the field for encryption carefully while keep other fields untouched. The whole idea is taken from [^4].
 
 **Code**:
 
-***Mapper*** The map implementation is `DeIdentifyHealthcareMapper`. The map function takes each line as `Text` type, seperate words by `,` deliminiter. There is no special things here, we check if current field need to be encrypted. If it is, we call `toHexString()` and `getSHA()` function to encrypt data as SHA-256 implementation. 
+***Mapper*** The map implementation is `DeIdentifyHealthcareMapper`. The map function takes each line as `Text` type, seperate words by `,` deliminiter. There is no special things here, we check if current field need to be encrypted. If it is, we call `toHexString()` and `getSHA()` function to encrypt data as SHA-256 implementation.
 
 We need to take care that, if we have not any result word yet, we must not add `,` to the result word to keep the original data format.
 
@@ -379,3 +379,8 @@ if (sum >= 60) {
 ![Create file input](images/problem9_input.png)
 ![Create folder, put input file into Lab02 directory and run program](images/problem9_mkdir.png)
 ![Program runs successfully and display the result](images/problem9_run.png)
+
+[^1]: A. Batkin, “Converting a sentence string to a string array of words in Java,” StackOverflow, 2014. https://stackoverflow.com/a/4674887/11985028.
+[^2]: A. Batkin, “Converting a sentence string to a string array of words in Java,” StackOverflow, 2014. https://stackoverflow.com/a/4674887/11985028.
+[^3]: Baeldung, “Ignoring Commas in Quotes When Splitting a Comma-separated String,” 2021. https://www.baeldung.com/java-split-string-commas.
+[^4]: S. Balasubramanian, “Hadoop-MapReduce Lab.” p. 27, 2016.
