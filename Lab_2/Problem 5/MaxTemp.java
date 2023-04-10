@@ -13,14 +13,6 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-/*
-Câu 5 lấy hàm split("\\s+")
-Cho vào mảng a[]
-a[0] chuyển thành string lưu vào biến year
-a[1] thành int hoặc float lưu vào temp
-Tới hàm reduce thì so sánh, lấy max rồi lưu vào
-*/
-
 public class MaxTemp {
 	public static class TempMap extends Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -76,13 +68,8 @@ public class MaxTemp {
 		job.setReducerClass(TempReduce.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-
-		//job.setInputFormatClass(TextInputFormat.class);
-		//job.setOutputFormatClass(TextOutputFormat.class);
-		//Path outputPath = new Path(args[1]);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		//outputPath.getFileSystem(conf).delete(outputPath);
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
