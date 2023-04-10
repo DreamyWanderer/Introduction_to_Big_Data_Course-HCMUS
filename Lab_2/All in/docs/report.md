@@ -27,7 +27,53 @@ code-block-font-size: \scriptsize
 | No. of task | % completed |
 |-------------|-------------|
 | 1 - 9       | 100%        |
-| 10          | 0%   		|
+| 10          | 30%   		|
+
+## Problem 1: Word Count
+
+**Input**: text file 'word_count.txt' 
+
+**Output**: the word count of particular words in the input file: the result as key-value pairs where the key represents the distinct words and the value denotes the number of times the word appears.
+
+**Idea**: For each word, the mapper function extracts the token and emits a key-value pair where the key is the word and value is set to 1. The reducer reads through the values associated with each key, sums up these values to find the total count for the given word, and emits the final key-value pair representing the word and its respective count.
+
+**Code**:
+***Mapper***
+*map() function*:
+
+- Use `toString()`  to convert it to a string format that StringTokenizer can work with.
+- Each key is a distinct word extracted from the input data, and the value is an integer representation of the number 1 (one), write down (key-value) pairs to `context`.
+  
+```java
+StringTokenizer str = new StringTokenizer(value.toString());
+while (str.hasMoreTokens()) {
+    word.set(str.nextToken());
+    context.write(word, one); 
+}
+```
+
+*reducer() function:*
+- Iinitializing an integer variable called sum to 0, in order to keep track of the total number of times the given word appears across all the input files.
+- Iterating over all the values associated with a given key: For each iteration, this line adds the integer value of the current val object to the sum variable. This effectively aggregates the frequency counts assigned to each instance of the word, giving a total count for the entire input data set.
+
+```java
+int sum = 0;
+for (IntWritable val : values) {
+    sum += val.get();
+}
+result.set(sum); // thiết lập giá trị của result thành sum
+context.write(key, result);
+```
+
+**Run program**
+
+**Run**:
+
+![](images/Problem1_Running.png)
+
+**Result**:
+
+![](images/Problem1_Result.png)
 
 ## Problem 2: Word Size Word Count
 
@@ -114,12 +160,6 @@ result.set(res);
 context.write(key, result);
 ```
 
-**Run program**
-
-![Create file input](images/problem3_input.png)
-![Create folder, put input file into Lab02 directory and run program](images/problem3_mkdir.png)
-![Program runs successfully and display the result](images/problem3_run.png)
-
 ## Problem 4: Patent Program
 
 **Input**: Each patent has sub-patent ids associated with it.
@@ -163,6 +203,63 @@ public void reduce(Text key, Iterable<Text> values, Context context) throws IOEx
 **Result**:
 
 ![](images/Problem4_Result.jpg)
+
+## Problem 5: MaxTemp Program
+
+**Input**: a subset of temperature records written in text file `temperature.txt. Each line is a year and a temperature record associated with it. Each year has multiple temperatures listed.
+
+**Output**: find the maximum temperature during a year. Each line is a year and the maximum temperature record associated with it.
+
+**Idea**: From the `LabRequirement.pdf`: tokenizes the input data and outputs key-value pairs where the key is the year and the value is the corresponding temperature. The reducer takes these key-value pairs and aggregates them for each year, finding the maximum temperature for each year as it iterates through the values associated with each key.
+
+**Code**:
+***Mapper***
+*map() function*:
+
+- Use `toString()`  to convert input to a string format that StringTokenizer can work with.
+- Breaking each record according to the delimiter whitespace
+- For each iteration: set the value for `year` from the first token, and set the value for `temp` from the second one. After that, we convert `temp` (string type) into `temper` (integer type).
+- Each key is a distinct year extracted from the input data, and the value is an integer representation of temperature, write down (key-value) pairs to `context`.
+  
+```java
+String line = value.toString();
+StringTokenizer tokenizer = new StringTokenizer(line, " ");
+		
+while (tokenizer.hasMoreTokens()) {
+	String year = tokenizer.nextToken();
+	word.set(year);
+			
+	String temp = tokenizer.nextToken().trim();
+	int temper = Integer.parseInt(temp);
+	context.write(word, new IntWritable(temper));
+}
+```
+
+*reducer() function:*
+- Iinitializing an integer variable called `maxtemp` to 0, in order to keep track of the maximum temperature of each year appears across all the input files.
+- Iterating over all the values associated with a given key: For each iteration, we define a local variable ``temperature` of type int which is taking all the temperature that belong to that year. Then we compare each element in `temperature` with `maxtemp` to update `maxtemp` with the new value greater than it.
+
+```java
+int maxtemp = 0;
+for(IntWritable it : values) {
+	int temperature = it.get();
+	if(maxtemp < temperature) {
+		maxtemp = temperature;
+	}
+}
+
+context.write(key, new IntWritable(maxtemp));
+```
+
+**Run program**
+
+**Run**:
+
+![](images/Problem5_Running.png)
+
+**Result**:
+
+![](images/Problem5_Result.png)
 
 ## Problem 6: Average Salary Program
 
@@ -375,7 +472,12 @@ if (sum >= 60) {
 ![Create folder, put input file into Lab02 directory and run program](images/problem9_mkdir.png)
 ![Program runs successfully and display the result](images/problem9_run.png)
 
+## Problem 10: Connected Components
+
+We use the idea from [^5].
+
 [^1]: A. Batkin, “Converting a sentence string to a string array of words in Java,” StackOverflow, 2014. https://stackoverflow.com/a/4674887/11985028.
 [^2]: A. Batkin, “Converting a sentence string to a string array of words in Java,” StackOverflow, 2014. https://stackoverflow.com/a/4674887/11985028.
 [^3]: Baeldung, “Ignoring Commas in Quotes When Splitting a Comma-separated String,” 2021. https://www.baeldung.com/java-split-string-commas.
 [^4]: S. Balasubramanian, “Hadoop-MapReduce Lab.” p. 27, 2016.
+[^5]: V. Rastogi, A. Machanavajjhala, L. Chitnis, and A. Das Sarma, “Finding Connected Components on Map-reduce in Logarithmic Rounds,” Mar. 2012, [Online]. Available: http://arxiv.org/abs/1203.5387.

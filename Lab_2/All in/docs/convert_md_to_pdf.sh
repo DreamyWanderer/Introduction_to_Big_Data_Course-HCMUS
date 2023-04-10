@@ -8,4 +8,5 @@ pandoc -H templates/disable_float.tex report.md \
 --top-level-division=chapter \
 --highlight-style breezedark \
 --shift-heading-level-by=-1 \
+--pdf-engine=xelatex \
 --resource-path=.:docs
