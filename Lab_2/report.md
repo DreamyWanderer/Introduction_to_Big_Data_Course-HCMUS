@@ -167,7 +167,6 @@ context.write(key, result);
 ```
 
 **Run program**
-![Create file input](images/problem3_input.png)
 ![Create folder, put input file into Lab02 directory and run program](images/problem3_mkdir.png)
 ![Program runs successfully and display the result](images/problem3_run.png)
 
