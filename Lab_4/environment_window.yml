@@ -1,0 +1,10 @@
+name: big_data_lab
+channels:
+  - defaults
+dependencies:
+  - python
+  - pyspark
+  - mongodb
+  - pymongo
+  - openjdk
+prefix: /home/dreamywanderer/miniconda3/envs/big_data_lab
