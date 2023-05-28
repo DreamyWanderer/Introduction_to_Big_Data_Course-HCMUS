@@ -1,6 +1,21 @@
 from pyspark.sql import SparkSession, Column
-from pyspark.sql.functions import from_json, to_json, col
+from pyspark.sql.functions import from_json, to_json, col, lit
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+from pyspark.sql.functions import udf
+from pyspark.sql.types import FloatType
+
+from textblob import TextBlob
+
+def GetSentimentValue(text):
+    analysis = TextBlob(text)
+    value = analysis.sentiment.polarity
+    return float(value)
+
+def SentimentValueToText(value):
+    if (value > 0): return 'Positive'
+    if (value < 0): return 'Negative'
+    return 'Neutral'
 
 def TweetsConsumerAndSentimentAnalyze():
 
@@ -47,11 +62,12 @@ def TweetsConsumerAndSentimentAnalyze():
         # Dataframe now have two columns: Date and Tweets (both have string type)
         df = df.select( from_json(col('value'), schema).alias("data")).select("data.*")
 
+        # Push the Dataframe to a Sentiment model and add a column results
+        sentiment_udf = udf(lambda text: GetSentimentValue(text), FloatType())
+        df = df.withColumn("Sentiment", sentiment_udf(df["Tweet"]))
+
         # Print to check
         df.writeStream.format("console").outputMode("append").start().awaitTermination()
-
-        # Push the Dataframe to a Sentiment model and add a column results
-            # Wait for implementation
 
     # In any case, if this script is stopped, the current Spark session must be destroyed too.
     finally:
