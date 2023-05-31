@@ -96,6 +96,6 @@ In the function `ForEachBatchFunction()` above, it traverses the row in the batc
 
 With 1 second interval time, in `visualize.py` we read the aggregated result in *results_visualize.json* and draw the pie chart show percentage of positive/negative/neutral tweets up to that time.
 
-Insight form results:
+Insight form results: It can be seen that the number of positive tweets about chatGPT accounts for the largest number, gradually increasing over time and occupying more than 50% of all tweets. On the contrary, the number of negative tweets is minimal, usually accounting for no more than 30% of all tweets about chatGPT. The percentage of negative tweets tends to decrease over time, when the number of tweets is large enough, the percentage of negative tweets is always below 20%. Besides that, the number of neutral tweets has the most volatility, especially in the early stages when there are less than 200 tweets in total. However, after that, when  the number of tweets increases rapidly, the percentage of neutral tweets gradually stabilized at 30-35%. Hence, we can draw the conclusion that ChatHPT gradually has a positive influence on Twitter's community.
 
 ## **References**
