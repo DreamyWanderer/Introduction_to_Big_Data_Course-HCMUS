@@ -16,16 +16,20 @@
 
 I suggest run in Linux OS. I really do not know what will happen if you run on Window OS.
 
-1. Creating environment for this Lab from *environment.yml* file. [How to do this?](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file)
-2. Activate created environment (This is important since there are lots of dependencies to run this Lab).
+1. Creating environment for this Lab from *environment.yml* file. [How to do this?](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file).
+2. Activate created environment (This is important since there are lots of dependencies to run this Lab). **All below command and console must be run in this environment.**
 3. Run the *setup.sh* by *bash*. This will create MongoDB server and Kafka servers.
-4. Run the *load_data.sh* in a **new** console/shell. This will load the Tweets data and push to MongoDB server. You can close console/shell when having completed this step.
-5. Run the *producer.sh* by *python* in **new** console/shell. This will pull Tweets from databases and push to Kafka **as long as** this process is still running.
-6. Run the *consumer_and_model.py* by *python* in **new** console/shell. This will pull events from Kafka, rebuild the original data in DataFrame format and push to a Sentiment analyze model, **as long as** this process is still running.
-7. When you have finished testing or when you want to start all over again, stop (Ctrl + C) all running processes.
+4. Run the *load_data.py* in a **new** console/shell. This will load the Tweets data and push to MongoDB server. You can close console/shell when having completed this step.
+5. Run the *visualize.py* in a **new** console/shell. This will start server for visualization.
+6. Run the *consumer_and_model.py* by *python* in **new** console/shell. This will pull events from Kafka, rebuild the original data in DataFrame format and push to a Sentiment analyze model, **as long as** this process is still running. The processed tweets will also shown here.
+7. Run the *producer.sh* by *python* in **new** console/shell. This will pull Tweets from databases and push to Kafka **as long as** this process is still running.
+8. When you have finished testing or when you want to start all over again, stop (Ctrl + C) all running processes.
 
 ## Warning
 
+- **There must not have any white space in the path to this folder, or else Kafka can not be started.**
+- **All above command must be run in the big_data_lab envirnoment, or else it will do not have suitable library to run.**
+- **In case of any error, please restart your machine and do it again.**
 - If you stop *setup.sh* process, the MongoDB and Kafka servers will stop and all data pushed to MongoDB databases, as well as logs/events in Kafka will also be deleted. In that case, you need to start again from step 3.
 - Step 5 and 6 is independent to step 3. You do not need to execute step 3 again if you only stop *producer.py* or *consumer_and_model.py*. You do not need to run *load_data.sh* again if *setup.sh* is still running normally.
 
