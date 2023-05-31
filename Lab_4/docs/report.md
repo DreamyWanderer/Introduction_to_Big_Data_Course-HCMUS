@@ -90,7 +90,7 @@ For each mini-batch that Spark has processed completely, it will send this batch
 
 This step is implemented in *visualize.py*.
 
-We use **Plotly** library to draw plot and **Dask** to update new results in real time.
+We use **Plotly** library to draw plot and **Dash** to update new results in real time.
 
 In the function `ForEachBatchFunction()` above, it traverses the row in the batch result dataframe to count number of positive/negative/neutral tweets in that mini-batch. After that it adds these value into the global variable counter `num_pos_tweet`, `num_neg_tweet` and `num_neu_tweet` to aggregate the results. These counter is exported to file *results_visualize.json*.
 
