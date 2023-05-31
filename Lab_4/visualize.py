@@ -41,9 +41,11 @@ def plot_donut_chart(n):
                     marker = dict(colors = ['#94dfff', '#ff6961', '#f0efeb'],
                                     line = dict(color = 'white', width = 2)))
 
-    fig.update_layout(title = 'Sentiment Analysis',
-                    annotations = [dict(text = 'Number of tweets:\n' + str(total_count), x = 0.5, y = 0.5, font_size = 20, showarrow = False)],
-                    showlegend = False)
+    fig.update_layout(title = 'Real-time Sentiment Analysis',
+                      annotations = [dict(text = 'Number of tweets:\n' + str(total_count), x = 0.5, y = 0.5, font_size = 20, showarrow = False)],
+                      width = 700,
+                      height = 700,
+                      showlegend = False)
     
     return fig
     
