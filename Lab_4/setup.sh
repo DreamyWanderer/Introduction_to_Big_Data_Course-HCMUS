@@ -18,12 +18,12 @@ mkdir -p ./data/mongodb
 mongod --dbpath ./data/mongodb &
 
 # Setup Kafka
-rm -rR kafka_2.12-3.4.0.tgz
+#rm -rR kafka_2.12-3.4.0.tgz
 rm -rR kafka_2.12-3.4.0
 rm -rR tmp
 export PATH=$PATH:./kafka_2.12-3.4.0/bin
 echo $PATH
-wget https://downloads.apache.org/kafka/3.4.0/kafka_2.12-3.4.0.tgz
+#wget https://downloads.apache.org/kafka/3.4.0/kafka_2.12-3.4.0.tgz
 tar xzf kafka_2.12-3.4.0.tgz
 
 # Create new server Kafka properties files

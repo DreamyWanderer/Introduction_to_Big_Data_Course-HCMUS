@@ -31,8 +31,11 @@ I suggest run in Linux OS. I really do not know what will happen if you run on W
 
 ## What have not been implemented?
 
-- Sentiment model and passing DataFrame to this model to have a result comlumn. After that, we can aggregrate results by type of positive/negative sentiment.
 - A new Python script to read aggregrated result and create series of plotting images (which will be converted to GIF).
+
+## Visualization
+
+### Method 1
 
 ## Extra
 
